@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Review Builder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .preview {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Product Review Builder</h1>
+    
+    <form id="reviewForm">
+        <div class="form-group">
+            <label for="productName">Product Name:</label>
+            <input type="text" id="productName" name="productName" required>
+        </div>
+
+        <div class="form-group">
+            <label for="productCategory">Product Category:</label>
+            <select id="productCategory" name="productCategory" required>
+                <option value="">Select a category</option>
+                <option value="electronics">Electronics</option>
+                <option value="clothing">Clothing</option>
+                <option value="books">Books</option>
+                <option value="home">Home & Kitchen</option>
+                <option value="beauty">Beauty & Personal Care</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="rating">Rating:</label>
+            <select id="rating" name="rating" required>
+                <option value="5">5 Stars - Excellent</option>
+                <option value="4">4 Stars - Very Good</option>
+                <option value="3">3 Stars - Good</option>
+                <option value="2">2 Stars - Fair</option>
+                <option value="1">1 Star - Poor</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="pros">Pros:</label>
+            <textarea id="pros" name="pros" rows="3" placeholder="What did you like about this product?"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="cons">Cons:</label>
+            <textarea id="cons" name="cons" rows="3" placeholder="What could be improved?"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="review">Full Review:</label>
+            <textarea id="review" name="review" rows="6" required placeholder="Write your detailed review here..."></textarea>
+        </div>
+
+        <button type="submit">Generate Review</button>
+    </form>
+
+    <div class="preview" id="reviewPreview">
+        <h2>Review Preview</h2>
+        <p><em>Your review will appear here after submission...</em></p>
+    </div>
+
+    <script>
+        document.getElementById('reviewForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const productName = document.getElementById('productName').value;
+            const rating = document.getElementById('rating').value;
+            const review = document.getElementById('review').value;
+            const pros = document.getElementById('pros').value;
+            const cons = document.getElementById('cons').value;
+            
+            const previewHtml = `
+                <h2>${productName} - ${rating} Stars</h2>
+                <h3>Pros:</h3>
+                <p>${pros || 'None specified'}</p>
+                <h3>Cons:</h3>
+                <p>${cons || 'None specified'}</p>
+                <h3>Full Review:</h3>
+                <p>${review}</p>
+            `;
+            
+            document.getElementById('reviewPreview').innerHTML = previewHtml;
+        });
+    </script>
+</body>
+</html>
